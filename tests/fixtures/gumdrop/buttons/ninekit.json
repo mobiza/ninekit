@@ -1,0 +1,1738 @@
+{
+  "generator": "ninekit 0.1.0",
+  "name": "gumdrop_buttons",
+  "ninekit": 1,
+  "pieces": {
+    "btn_berry": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_berry_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_berry_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_berry_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_berry_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_berry_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_berry_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btn_cloud": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_cloud_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_cloud_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_cloud_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_cloud_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_cloud_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_cloud_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btn_coal": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_coal_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_coal_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_coal_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_coal_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_coal_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_coal_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btn_grape": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_grape_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_grape_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_grape_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_grape_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_grape_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_grape_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btn_gray": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_gray_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_gray_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_gray_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_gray_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_gray_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_gray_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btn_mint": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_mint_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_mint_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_mint_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_mint_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_mint_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_mint_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btn_sky": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_sky_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_sky_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_sky_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_sky_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_sky_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_sky_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btn_sun": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        128.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btn_sun_face@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_sun_face@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_sun_face@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btn_sun_frame@1x.png",
+            "size_px": [
+              128,
+              62
+            ],
+            "slice_px": [
+              28,
+              30,
+              28,
+              31
+            ]
+          },
+          "2": {
+            "file": "btn_sun_frame@2x.png",
+            "size_px": [
+              256,
+              124
+            ],
+            "slice_px": [
+              56,
+              60,
+              56,
+              62
+            ]
+          },
+          "3": {
+            "file": "btn_sun_frame@3x.png",
+            "size_px": [
+              384,
+              186
+            ],
+            "slice_px": [
+              84,
+              90,
+              84,
+              93
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        128.0,
+        62.0
+      ],
+      "slice": [
+        28.0,
+        30.0,
+        28.0,
+        31.0
+      ],
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "btnc_berry": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_berry_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_berry_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_berry_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_berry_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_berry_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_berry_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "main": {
+          "1": {
+            "file": "btnc_berry@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_berry@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_berry@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face",
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "btnc_cloud": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_cloud_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_cloud_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_cloud_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_cloud_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_cloud_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_cloud_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "btnc_coal": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_coal_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_coal_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_coal_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_coal_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_coal_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_coal_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "btnc_grape": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_grape_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_grape_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_grape_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_grape_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_grape_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_grape_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "btnc_gray": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_gray_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_gray_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_gray_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_gray_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_gray_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_gray_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "btnc_mint": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_mint_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_mint_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_mint_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_mint_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_mint_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_mint_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "btnc_sky": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_sky_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_sky_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_sky_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_sky_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_sky_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_sky_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "main": {
+          "1": {
+            "file": "btnc_sky@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_sky@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_sky@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face",
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "btnc_sun": {
+      "content": [
+        12,
+        8,
+        12,
+        17
+      ],
+      "design_size": [
+        62.0,
+        62.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "face": {
+          "1": {
+            "file": "btnc_sun_face@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_sun_face@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_sun_face@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        },
+        "frame": {
+          "1": {
+            "file": "btnc_sun_frame@1x.png",
+            "size_px": [
+              62,
+              62
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "btnc_sun_frame@2x.png",
+            "size_px": [
+              124,
+              124
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "btnc_sun_frame@3x.png",
+            "size_px": [
+              186,
+              186
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        62.0,
+        62.0
+      ],
+      "slice": null,
+      "slicing": "block",
+      "stack": [
+        "frame",
+        "face"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    }
+  },
+  "scales": [
+    1,
+    2,
+    3
+  ]
+}

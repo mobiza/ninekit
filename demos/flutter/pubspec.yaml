@@ -1,0 +1,25 @@
+name: ninekit_demo
+description: "Proves ninekit's Flutter export: resolution-aware 9-slice sprites (see regenerate.sh)."
+publish_to: 'none'
+version: 1.0.0+1
+
+environment:
+  sdk: ^3.8.0
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    # written by `ninekit export` (regenerate.sh prints these lines):
+    # basics, gumdrop and probe have a 1x main file per image, so their folder is enough
+    - assets/ui/basics/
+    - assets/ui/probe/
+    - assets/ui/gumdrop/

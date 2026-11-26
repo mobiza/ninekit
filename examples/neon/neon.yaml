@@ -1,0 +1,320 @@
+ninekit: 1
+name: neon
+description: >
+  Dark-glass cyberpunk HUD set: chamfered corners, thin cyan neon edges with a soft additive glow,
+  magenta accents. Light comes from the top: glass sheen at the top, darker glass at the bottom,
+  recesses lit on their bottom wall.
+scales: [1, 2, 3]
+out: out/
+
+vars:
+  G: 6                 # glow room around glowing pieces (their overhang)
+  E: 1                 # neon edge width
+  C: 12                # big chamfer (top-left, bottom-right)
+  c: 5                 # small chamfer (top-right, bottom-left)
+  GLOW: 0.55           # glow strength
+  GLOW_SOFT: 4         # glow reach
+
+colors:
+  cyan: "#38E8FF"
+  cyan_hot: "#D9FCFF"
+  cyan_dim: "#1F7E9C"
+  magenta: "#FF3BD4"
+  magenta_hot: "#FFD8F6"
+  navy: "#04121F"
+  # glass: lit at the top, flat through the middle (the window's y axis tiles its scanlines)
+  glass: [[0, "#163450F0"], [0.22, "#0C1F33F0"], [0.78, "#0C1F33F0"], [1, "#07111DF4"]]
+  sheen: [[0, "#9FF3FF38"], [1, "#9FF3FF00"]]
+  scan: [[0, "#38E8FF00"], [1, "#38E8FF16"]]
+  well: "#02070D"
+  pit: [[0, "#01050A"], [1, "#071523"]]
+
+pieces:
+  # ---------------------------------------------------------------- the big window
+  window:
+    size: [168, 128]
+    stretch: [stretch, tile]          # scanlines repeat vertically
+    content: ["G + 10", "G + 28", "G + 10", "G + 10"]
+    overhang: [G, G, G, G]
+    vars:
+      HB: G + 22         # header line (y)
+    layers:
+      - name: glow
+        shape: {inset: G, chamfer: [C, c, C, c]}
+        ring: E
+        soft: GLOW_SOFT
+        falloff: exp
+        fill: cyan
+        opacity: GLOW
+        blend: add
+      - name: glass
+        shape: {inset: G, chamfer: [C, c, C, c]}
+        fill: {vgrad: glass, from: G, to: "h - G"}
+      - name: scanlines
+        shape: {inset: "G + 1", chamfer: ["C - 0.4", "c - 0.4", "C - 0.4", "c - 0.4"]}
+        fill: {noise: {kind: wood, period: [0, 3], scale: 3, seed: 1, stops: scan}}
+      - name: header tint
+        shape: {inset: [G, G, G, "h - HB"], chamfer: [C, c, 0, 0]}
+        fill: cyan
+        opacity: 0.07
+      - name: sheen
+        shape: {inset: "G + E", chamfer: ["C - 0.4", "c - 0.4", "C - 0.4", "c - 0.4"]}
+        fill: {vgrad: sheen, from: "G + E", to: HB}
+      - name: header line
+        shape: {rect: ["G + 4", HB, "w - G - 4", "HB + 1"]}
+        fill: cyan
+        opacity: 0.35
+      - name: inner frame
+        shape: {inset: "G + 3", chamfer: ["C - 1.2", "c - 1.2", "C - 1.2", "c - 1.2"]}
+        ring: 1
+        fill: cyan
+        opacity: 0.12
+      - name: edge
+        shape: {inset: G, chamfer: [C, c, C, c]}
+        ring: E
+        fill: cyan
+      - name: accent bar          # magenta tab on the top edge, inside the left slice
+        shape: {polygon: [["G + C + 4", "G - 1"], ["G + C + 34", "G - 1"], ["G + C + 31", "G + 2"], ["G + C + 7", "G + 2"]]}
+        fill: magenta
+      - name: status dots         # three LEDs in the header, inside the right slice
+        shape:
+          union:
+            - {rect: ["w - G - 26", "G + 9", "w - G - 22", "G + 13"]}
+            - {rect: ["w - G - 19", "G + 9", "w - G - 15", "G + 13"]}
+        fill: cyan
+        opacity: 0.45
+      - name: status dot (live)
+        shape: {rect: ["w - G - 12", "G + 9", "w - G - 8", "G + 13"]}
+        fill: magenta
+      - name: corner ticks
+        shape:
+          union:
+            - {polygon: [["G + 3", "G + C + 4"], ["G + C + 4", "G + 3"], ["G + C + 6", "G + 3"], ["G + 3", "G + C + 6"]]}
+            - {polygon: [["w - G - 3", "h - G - C - 4"], ["w - G - C - 4", "h - G - 3"],
+                         ["w - G - C - 6", "h - G - 3"], ["w - G - 3", "h - G - C - 6"]]}
+        fill: cyan
+        opacity: 0.85
+
+  # ---------------------------------------------------------------- a small recessed panel
+  inset:
+    size: [64, 48]
+    content: [8, 8, 8, 8]
+    vars:
+      k: 4
+    layers:
+      - name: pit
+        shape: {inset: 0, chamfer: k}
+        fill: {vgrad: pit}
+      - name: inner shadow
+        shape: {inset: 0, chamfer: k}
+        fill: {depth: [[0, "#000000C0"], [3, "#00000000"]]}
+      - name: rim
+        shape: {inset: 0, chamfer: k}
+        ring: 1
+        fill: cyan_dim
+        opacity: 0.8
+      - name: lit bottom edge     # light from the top falls on the far (bottom) wall of a recess
+        shape: {inset: 0, chamfer: k}
+        ring: 1
+        clip: {rect: [0, "h - 6", w, h]}
+        fill: cyan
+        opacity: 0.6
+
+  # ---------------------------------------------------------------- buttons: frame + face
+  btn_primary:
+    size: [124, 56]
+    stretch: [stretch, fixed]   # the slanted hatch spans the height: a button keeps its height
+    outputs: [frame, face]
+    content: ["G + 12", "G + 6", "G + 18", "G + 7"]
+    overhang: [G, G, G, G]
+    vars:
+      BC: 10
+      Bc: 4
+      F: G + E + 0.6       # the face sits inside the neon edge
+      HATCH: 0.22          # the "///" detail
+    colors:
+      face: [[0, "#7CF5FF"], [0.12, "#3FE3F8"], [0.6, "#16B6DE"], [1, "#0B84B5"]]
+      face_glow: [[0, "#E6FEFFC0"], [2.5, "#E6FEFF00"]]
+      ring: cyan
+      hatch: navy
+      sheen_top: "#FFFFFF60"
+    layers:
+      - {name: glow, output: frame, shape: {inset: G, chamfer: [BC, Bc, BC, Bc]}, ring: E, soft: GLOW_SOFT,
+         falloff: exp, fill: ring, opacity: GLOW, blend: add}
+      - {name: well, output: frame, shape: {inset: G, chamfer: [BC, Bc, BC, Bc]}, fill: well}
+      - {name: edge, output: frame, shape: {inset: G, chamfer: [BC, Bc, BC, Bc]}, ring: E, fill: ring}
+      - name: face
+        output: face
+        shape: {inset: F, chamfer: ["BC - 0.6", "Bc - 0.4", "BC - 0.6", "Bc - 0.4"]}
+        fill: {vgrad: face, from: F, to: "h - F"}
+      - name: inner glow
+        output: face
+        shape: {inset: F, chamfer: ["BC - 0.6", "Bc - 0.4", "BC - 0.6", "Bc - 0.4"]}
+        fill: {depth: face_glow}
+      - name: sheen             # the face shape itself, fading out by mid-height: no box edges
+        output: face
+        shape: {inset: "F + 1", chamfer: ["BC - 1", "Bc - 0.8", "BC - 1", "Bc - 0.8"]}
+        fill: {vgrad: [[0, sheen_top], [1, "#FFFFFF00"]], from: "F + 1", to: "h / 2"}
+      - name: hatch             # three slanted bars at the right end, inside the right slice
+        output: face
+        shape:
+          union:
+            - {polygon: [["w - G - 21", "h - F - 3"], ["w - G - 18", "h - F - 3"], ["w - G - 12", "F + 3"], ["w - G - 15", "F + 3"]]}
+            - {polygon: [["w - G - 16", "h - F - 3"], ["w - G - 13", "h - F - 3"], ["w - G - 7", "F + 3"], ["w - G - 10", "F + 3"]]}
+        fill: hatch
+        opacity: HATCH
+      - name: hot top line
+        output: face
+        shape: {inset: F, chamfer: ["BC - 0.6", "Bc - 0.4", "BC - 0.6", "Bc - 0.4"]}
+        ring: 1
+        clip: {rect: [0, 0, w, "F + 3"]}
+        fill: cyan_hot
+        opacity: 0.9
+    variants:
+      btn_secondary:            # dark glass, the same cyan edge, a dimmer glow
+        colors:
+          face: [[0, "#1D3350F0"], [0.5, "#0F1D30F2"], [1, "#0A1422F4"]]
+          face_glow: [[0, "#38E8FF55"], [3, "#38E8FF00"]]
+          ring: "#2FC3E3"
+          cyan_hot: "#7FEFFF"
+          hatch: cyan
+          sheen_top: "#FFFFFF30"
+        vars:
+          GLOW: 0.3
+          HATCH: 0.35
+
+  # ---------------------------------------------------------------- toggle tab (hex pill)
+  tab:
+    size: [100, 40]
+    content: ["P + 12", "P + 4", "P + 12", "P + 4"]
+    overhang: [P, P, P, P]
+    vars:
+      P: 5
+      K: (h - 2 * P) / 2
+    colors:
+      tab_fill: [[0, "#FF6FE0E0"], [0.5, "#D51FAFE6"], [1, "#8E0F78EB"]]
+      tab_edge: magenta
+      tab_line: magenta_hot
+    layers:
+      - {name: glow, shape: {inset: P, chamfer: K}, ring: E, soft: 3.5, falloff: exp, fill: tab_edge,
+         opacity: GLOW, blend: add}
+      - {name: fill, shape: {inset: P, chamfer: K}, fill: {vgrad: tab_fill, from: P, to: "h - P"}}
+      - name: sheen
+        shape: {inset: "P + 1", chamfer: "K - 0.4"}
+        fill: {vgrad: [[0, "#FFFFFF40"], [1, "#FFFFFF00"]], from: "P + 1", to: "h / 2"}
+      - {name: edge, shape: {inset: P, chamfer: K}, ring: E, fill: tab_edge}
+      - name: top line
+        shape: {inset: P, chamfer: K}
+        ring: 1
+        clip: {rect: [0, 0, w, "P + 2.5"]}
+        fill: tab_line
+        opacity: 0.85
+    variants:
+      tab_idle:
+        vars: {GLOW: 0}
+        colors:
+          tab_fill: [[0, "#13253CD8"], [1, "#0A1626E0"]]
+          tab_edge: cyan_dim
+          tab_line: "#3AA9C6"
+
+  # ---------------------------------------------------------------- progress bar
+  bar_track:
+    size: [120, 18]
+    content: [3, 3, 3, 3]
+    vars:
+      k: 4
+    layers:
+      - {name: pit, shape: {inset: 0, chamfer: k}, fill: {vgrad: pit}}
+      - {name: inner shadow, shape: {inset: 0, chamfer: k}, fill: {depth: [[0, "#000000C0"], [2.5, "#00000000"]]}}
+      - {name: rim, shape: {inset: 0, chamfer: k}, ring: 1, fill: cyan_dim}
+      - name: lit bottom edge
+        shape: {inset: 0, chamfer: k}
+        ring: 1
+        clip: {rect: [0, "h - 4", w, h]}
+        fill: cyan
+        opacity: 0.55
+
+  # placed in the track's content box (12 dp tall); its glow spills 2 dp. Segmented: slanted gaps every
+  # 10 dp are cut out, so x tiles in whole segments. The gaps are shapes, not a periodic paint, so auto
+  # slicing cannot find their period: the slices are explicit, with a middle of 5 whole periods.
+  bar_fill:
+    size: [64, 16]
+    stretch: [tile, fixed]
+    slice: [7, 7, 7, 8]
+    overhang: [2, 2, 2, 2]
+    vars:
+      k: 3
+    layers:
+      - {name: glow, shape: {inset: 2, chamfer: k}, ring: 1, soft: 2.5, falloff: exp, fill: magenta,
+         opacity: 0.6, blend: add}
+      - name: fill
+        shape: {inset: 2, chamfer: k}
+        fill: {vgrad: [[0, "#FF9AEA"], [0.35, "#FF3BD4"], [1, "#A8128C"]], from: 2, to: "h - 2"}
+      - name: hot line
+        shape: {rect: ["2 + k", 3, "w - 2 - k", 4]}
+        fill: magenta_hot
+        opacity: 0.9
+      - name: segment gaps
+        shape:
+          union:
+            - {polygon: [[-7, 2], [-5.2, 2], [-7.2, 14], [-9, 14]]}
+            - {polygon: [[3, 2], [4.8, 2], [2.8, 14], [1, 14]]}
+            - {polygon: [[13, 2], [14.8, 2], [12.8, 14], [11, 14]]}
+            - {polygon: [[23, 2], [24.8, 2], [22.8, 14], [21, 14]]}
+            - {polygon: [[33, 2], [34.8, 2], [32.8, 14], [31, 14]]}
+            - {polygon: [[43, 2], [44.8, 2], [42.8, 14], [41, 14]]}
+            - {polygon: [[53, 2], [54.8, 2], [52.8, 14], [51, 14]]}
+            - {polygon: [[63, 2], [64.8, 2], [62.8, 14], [61, 14]]}
+            - {polygon: [[73, 2], [74.8, 2], [72.8, 14], [71, 14]]}
+        clip: {inset: 2, chamfer: k}
+        fill: "#000000"
+        blend: erase
+
+  # ---------------------------------------------------------------- notification badge
+  badge:
+    size: [30, 30]
+    slice: none
+    content: [7, 7, 7, 7]
+    overhang: [4, 4, 4, 4]
+    layers:
+      - {name: glow, shape: {circle: [15, 15, 11.5]}, ring: 1, soft: 4, falloff: exp, fill: magenta,
+         opacity: 0.7, blend: add}
+      - name: keyline             # a dark ring keeps the badge readable over bright art
+        shape: {circle: [15, 15, 11.5]}
+        fill: navy
+      - name: disc
+        shape: {circle: [15, 15, 10.5]}
+        fill: {vgrad: [[0, "#FF8DE8"], [0.45, "#F02BC6"], [1, "#9C0C82"]], from: 4.5, to: 25.5}
+      - name: rim
+        shape: {circle: [15, 15, 10.5]}
+        ring: 1.2
+        fill: magenta_hot
+      - name: highlight
+        shape: {ellipse: [15, 10.5, 5.5, 2.6]}
+        fill: "#FFFFFF"
+        soft: 1.2
+        opacity: 0.4
+
+  # ---------------------------------------------------------------- divider / header strip
+  divider:
+    size: [160, 12]
+    overhang: [0, 3, 0, 3]
+    vars:
+      Y: h / 2
+    layers:
+      - name: glow
+        shape: {polygon: [[10, Y], [14, "Y - 0.6"], ["w - 14", "Y - 0.6"], ["w - 10", Y], ["w - 14", "Y + 0.6"], [14, "Y + 0.6"]]}
+        soft: 3
+        falloff: exp
+        fill: cyan
+        opacity: 0.6
+        blend: add
+      - name: line
+        shape: {polygon: [[10, Y], [14, "Y - 0.6"], ["w - 14", "Y - 0.6"], ["w - 10", Y], ["w - 14", "Y + 0.6"], [14, "Y + 0.6"]]}
+        fill: cyan
+      - name: end diamonds
+        shape:
+          union:
+            - {polygon: [[2, Y], [5, "Y - 3"], [8, Y], [5, "Y + 3"]]}
+            - {polygon: [["w - 2", Y], ["w - 5", "Y - 3"], ["w - 8", Y], ["w - 5", "Y + 3"]]}
+        fill: magenta

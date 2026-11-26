@@ -1,0 +1,19 @@
+ninekit: 1
+scales: [1, 2, 3]
+
+colors:
+  edge: "#7A2E0E"
+  lip: [[0, "#E0662A"], [1, "#A83E14"]]
+  face: [[0, "#FFD983"], [0.45, "#FFB23E"], [1, "#FF8F1F"]]
+
+pieces:
+  button:
+    size: [96, 52]               # dp; rendered natively at @1x, @2x and @3x
+    content: [16, 8, 16, 14]     # where the label goes
+    overhang: [0, 0, 0, 3]       # the soft shadow hangs outside the box
+    layers:                      # back to front
+      - {name: shadow, shape: {rect: [1, 3, "w - 1", h], r: 16}, fill: "#000000", soft: 3, opacity: 0.35}
+      - {name: outline, shape: {rect: [0, 0, w, "h - 3"], r: 16}, fill: edge}
+      - {name: lip, shape: {rect: [2, 2, "w - 2", "h - 5"], r: 14}, fill: {vgrad: lip}}
+      - {name: face, shape: {rect: [2, 2, "w - 2", "h - 11"], r: 14}, fill: {vgrad: face}}
+      - {name: gloss, shape: {rect: [9, 5, "w - 9", 17], r: 6}, fill: "#FFFFFF", opacity: 0.4}

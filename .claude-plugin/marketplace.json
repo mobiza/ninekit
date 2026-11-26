@@ -1,0 +1,25 @@
+{
+  "name": "mobiza",
+  "owner": {
+    "name": "Mobiza Games"
+  },
+  "metadata": {
+    "description": "Mobiza Games' Claude Code plugins."
+  },
+  "plugins": [
+    {
+      "name": "ninekit",
+      "source": "./",
+      "description": "Engine-agnostic UI sprite generator: measured, verified 9-slice panels, buttons, bars, badges and HUD pieces from a reference screenshot or a style description, exported for Godot, Unity, Flutter, CSS, Phaser or JSON.",
+      "version": "0.1.0",
+      "author": {
+        "name": "Mobiza Games"
+      },
+      "homepage": "https://github.com/mobiza/ninekit",
+      "repository": "https://github.com/mobiza/ninekit",
+      "license": "MIT",
+      "keywords": ["ui", "sprites", "9-slice", "nine-patch", "game-ui", "godot", "unity", "flutter", "css", "phaser"],
+      "category": "development"
+    }
+  ]
+}

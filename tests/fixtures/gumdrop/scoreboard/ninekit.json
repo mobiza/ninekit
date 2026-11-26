@@ -1,0 +1,702 @@
+{
+  "generator": "ninekit 0.1.0",
+  "name": "gumdrop_scoreboard",
+  "ninekit": 1,
+  "pieces": {
+    "card": {
+      "content": [
+        14,
+        10,
+        14,
+        16
+      ],
+      "design_size": [
+        72.0,
+        60.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "card@1x.png",
+            "size_px": [
+              36,
+              60
+            ],
+            "slice_px": [
+              17,
+              15,
+              17,
+              21
+            ]
+          },
+          "2": {
+            "file": "card@2x.png",
+            "size_px": [
+              72,
+              120
+            ],
+            "slice_px": [
+              34,
+              30,
+              34,
+              42
+            ]
+          },
+          "3": {
+            "file": "card@3x.png",
+            "size_px": [
+              108,
+              180
+            ],
+            "slice_px": [
+              51,
+              45,
+              51,
+              63
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        36.0,
+        60.0
+      ],
+      "slice": [
+        17.0,
+        15.0,
+        17.0,
+        21.0
+      ],
+      "slicing": "auto",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "card_me": {
+      "content": [
+        14,
+        10,
+        14,
+        16
+      ],
+      "design_size": [
+        72.0,
+        60.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "card_me@1x.png",
+            "size_px": [
+              36,
+              60
+            ],
+            "slice_px": [
+              17,
+              15,
+              17,
+              21
+            ]
+          },
+          "2": {
+            "file": "card_me@2x.png",
+            "size_px": [
+              72,
+              120
+            ],
+            "slice_px": [
+              34,
+              30,
+              34,
+              42
+            ]
+          },
+          "3": {
+            "file": "card_me@3x.png",
+            "size_px": [
+              108,
+              180
+            ],
+            "slice_px": [
+              51,
+              45,
+              51,
+              63
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        3
+      ],
+      "size": [
+        36.0,
+        60.0
+      ],
+      "slice": [
+        17.0,
+        15.0,
+        17.0,
+        21.0
+      ],
+      "slicing": "auto",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "medal_1": {
+      "content": null,
+      "design_size": [
+        34.0,
+        36.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "medal_1@1x.png",
+            "size_px": [
+              34,
+              36
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "medal_1@2x.png",
+            "size_px": [
+              68,
+              72
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "medal_1@3x.png",
+            "size_px": [
+              102,
+              108
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": null,
+      "size": [
+        34.0,
+        36.0
+      ],
+      "slice": null,
+      "slicing": "none",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "medal_2": {
+      "content": null,
+      "design_size": [
+        34.0,
+        36.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "medal_2@1x.png",
+            "size_px": [
+              34,
+              36
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "medal_2@2x.png",
+            "size_px": [
+              68,
+              72
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "medal_2@3x.png",
+            "size_px": [
+              102,
+              108
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": null,
+      "size": [
+        34.0,
+        36.0
+      ],
+      "slice": null,
+      "slicing": "none",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "medal_3": {
+      "content": null,
+      "design_size": [
+        34.0,
+        36.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "medal_3@1x.png",
+            "size_px": [
+              34,
+              36
+            ],
+            "slice_px": null
+          },
+          "2": {
+            "file": "medal_3@2x.png",
+            "size_px": [
+              68,
+              72
+            ],
+            "slice_px": null
+          },
+          "3": {
+            "file": "medal_3@3x.png",
+            "size_px": [
+              102,
+              108
+            ],
+            "slice_px": null
+          }
+        }
+      },
+      "overhang": null,
+      "size": [
+        34.0,
+        36.0
+      ],
+      "slice": null,
+      "slicing": "none",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "metric": {
+      "content": [
+        8,
+        3,
+        8,
+        4
+      ],
+      "design_size": [
+        48.0,
+        26.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "metric@1x.png",
+            "size_px": [
+              18,
+              26
+            ],
+            "slice_px": [
+              8,
+              8,
+              8,
+              9
+            ]
+          },
+          "2": {
+            "file": "metric@2x.png",
+            "size_px": [
+              36,
+              52
+            ],
+            "slice_px": [
+              16,
+              16,
+              16,
+              18
+            ]
+          },
+          "3": {
+            "file": "metric@3x.png",
+            "size_px": [
+              54,
+              78
+            ],
+            "slice_px": [
+              24,
+              24,
+              24,
+              27
+            ]
+          }
+        }
+      },
+      "overhang": null,
+      "size": [
+        18.0,
+        26.0
+      ],
+      "slice": [
+        8.0,
+        8.0,
+        8.0,
+        9.0
+      ],
+      "slicing": "auto",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "panel": {
+      "content": [
+        14,
+        12,
+        14,
+        18
+      ],
+      "design_size": [
+        80.0,
+        72.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "panel@1x.png",
+            "size_px": [
+              40,
+              72
+            ],
+            "slice_px": [
+              19,
+              18,
+              19,
+              23
+            ]
+          },
+          "2": {
+            "file": "panel@2x.png",
+            "size_px": [
+              80,
+              144
+            ],
+            "slice_px": [
+              38,
+              36,
+              38,
+              46
+            ]
+          },
+          "3": {
+            "file": "panel@3x.png",
+            "size_px": [
+              120,
+              216
+            ],
+            "slice_px": [
+              57,
+              54,
+              57,
+              69
+            ]
+          }
+        }
+      },
+      "overhang": [
+        0,
+        0,
+        0,
+        2
+      ],
+      "size": [
+        40.0,
+        72.0
+      ],
+      "slice": [
+        19.0,
+        18.0,
+        19.0,
+        23.0
+      ],
+      "slicing": "auto",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    },
+    "pill_idle": {
+      "content": [
+        14,
+        5,
+        14,
+        8
+      ],
+      "design_size": [
+        64.0,
+        32.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "pill_idle@1x.png",
+            "size_px": [
+              34,
+              32
+            ],
+            "slice_px": [
+              16,
+              15,
+              16,
+              16
+            ]
+          },
+          "2": {
+            "file": "pill_idle@2x.png",
+            "size_px": [
+              68,
+              64
+            ],
+            "slice_px": [
+              32,
+              30,
+              32,
+              32
+            ]
+          },
+          "3": {
+            "file": "pill_idle@3x.png",
+            "size_px": [
+              102,
+              96
+            ],
+            "slice_px": [
+              48,
+              45,
+              48,
+              48
+            ]
+          }
+        }
+      },
+      "overhang": null,
+      "size": [
+        34.0,
+        32.0
+      ],
+      "slice": [
+        16.0,
+        15.0,
+        16.0,
+        16.0
+      ],
+      "slicing": "auto",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "pill_sel": {
+      "content": [
+        14,
+        5,
+        14,
+        8
+      ],
+      "design_size": [
+        64.0,
+        32.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "pill_sel@1x.png",
+            "size_px": [
+              34,
+              32
+            ],
+            "slice_px": [
+              16,
+              15,
+              16,
+              16
+            ]
+          },
+          "2": {
+            "file": "pill_sel@2x.png",
+            "size_px": [
+              68,
+              64
+            ],
+            "slice_px": [
+              32,
+              30,
+              32,
+              32
+            ]
+          },
+          "3": {
+            "file": "pill_sel@3x.png",
+            "size_px": [
+              102,
+              96
+            ],
+            "slice_px": [
+              48,
+              45,
+              48,
+              48
+            ]
+          }
+        }
+      },
+      "overhang": null,
+      "size": [
+        34.0,
+        32.0
+      ],
+      "slice": [
+        16.0,
+        15.0,
+        16.0,
+        16.0
+      ],
+      "slicing": "auto",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "fixed"
+      ]
+    },
+    "tab_strip": {
+      "content": [
+        4,
+        4,
+        4,
+        5
+      ],
+      "design_size": [
+        80.0,
+        40.0
+      ],
+      "mode": "color",
+      "outputs": {
+        "main": {
+          "1": {
+            "file": "tab_strip@1x.png",
+            "size_px": [
+              28,
+              29
+            ],
+            "slice_px": [
+              13,
+              13,
+              13,
+              14
+            ]
+          },
+          "2": {
+            "file": "tab_strip@2x.png",
+            "size_px": [
+              56,
+              58
+            ],
+            "slice_px": [
+              26,
+              26,
+              26,
+              28
+            ]
+          },
+          "3": {
+            "file": "tab_strip@3x.png",
+            "size_px": [
+              84,
+              87
+            ],
+            "slice_px": [
+              39,
+              39,
+              39,
+              42
+            ]
+          }
+        }
+      },
+      "overhang": null,
+      "size": [
+        28.0,
+        29.0
+      ],
+      "slice": [
+        13.0,
+        13.0,
+        13.0,
+        14.0
+      ],
+      "slicing": "auto",
+      "stack": [
+        "main"
+      ],
+      "stretch": [
+        "stretch",
+        "stretch"
+      ]
+    }
+  },
+  "scales": [
+    1,
+    2,
+    3
+  ]
+}

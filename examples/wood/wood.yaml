@@ -1,0 +1,509 @@
+ninekit: 1
+name: wood
+description: >
+  Warm medieval/fantasy set: an oak plank panel with tiled grain in a darker carved frame with brass
+  corner studs, a parchment card, a green-gem primary button and a stone secondary button (frame + face,
+  sharing one metal bezel), a progress bar and a wax-seal badge. Light comes from the top.
+scales: [1, 2, 3]
+out: out/
+
+# The plank geometry and the seal outline are generated numbers: rows of 16 dp starting at the board's top
+# edge, three row types repeating every 48 dp, each with its butt joints at its own x every 64 dp (the
+# grain's period), so the panel tiles in whole periods and the rows stay aligned with the frame.
+
+vars:
+  FW: 14               # panel frame width
+  SH: 3                # panel drop shadow
+
+colors:
+  outline: "#1C0D04"
+  frame_wood: [[0, "#2E180A"], [0.5, "#40230F"], [1, "#4F2D15"]]
+  frame_light: "#E0A86C"
+  groove: "#120701"
+  seam: "#170B03"
+  oak_a: [[0, "#5A3417"], [0.25, "#8A5A2E"], [0.5, "#A06A38"], [0.8, "#B07A44"], [1, "#C08850"]]
+  oak_b: [[0, "#51300F"], [0.25, "#7E522A"], [0.5, "#946234"], [0.8, "#A4713F"], [1, "#B27E4A"]]
+  oak_c: [[0, "#603A1B"], [0.25, "#936233"], [0.5, "#AA733D"], [0.8, "#BA8449"], [1, "#C99256"]]
+  wood_tint: [[0, "#3A1A0048"], [0.5, "#3A1A0000"], [1, "#FFE0B024"]]
+  brass: [[0, "#FFF2C0"], [0.3, "#F2C766"], [0.7, "#B9812C"], [1, "#6E4513"]]
+  brass_dark: "#3B2208"
+  parchment: [[0, "#E6CD9C"], [0.5, "#EED9B0"], [1, "#F6E7C5"]]
+  ink: "#4A2C12"
+
+pieces:
+  # ---------------------------------------------------------------- oak plank panel, carved frame, studs
+  panel:
+    size: [176, 143]
+    stretch: [tile, tile]               # grain + planks repeat both ways (64 x 48 dp)
+    content: ["FW + 6", "FW + 6", "FW + 6", "FW + 6 + SH"]
+    overhang: [0, 0, 0, SH]
+    vars:
+      B: h - SH
+      R: 10
+      SR: 4.8                           # stud radius
+      SC: FW / 2                        # stud centre, from the frame's outer edge
+    layers:
+      - name: shadow
+        shape: {rect: [1, 2, "w - 1", "B + SH"], r: R}
+        fill: "#000000"
+        soft: 2.5
+        falloff: smooth
+        opacity: 0.45
+      - name: outline
+        shape: {rect: [0, 0, w, B], r: R}
+        fill: outline
+      # the frame is four mitred members: grain along x on the top and bottom rails; noise grain only runs
+      # along x, so the stiles (sides) get a calm, fine value noise instead of cross-grain stripes
+      - name: frame rails (top, bottom)
+        shape:
+          union:
+            - {polygon: [[0, 0], [w, 0], ["w - FW", FW], [FW, FW]]}
+            - {polygon: [[FW, "B - FW"], ["w - FW", "B - FW"], [w, B], [0, B]]}
+        clip: &frame {rect: [1, 1, "w - 1", "B - 1"], r: "R - 1"}
+        fill: {noise: {kind: wood, period: [64, 48], scale: 3, octaves: 3, seed: 21, warp: 0.4, stops: frame_wood}}
+      - name: frame stiles (sides)
+        shape:
+          union:
+            - {polygon: [[0, 0], [FW, FW], [FW, "B - FW"], [0, B]]}
+            - {polygon: [[w, 0], [w, B], ["w - FW", "B - FW"], ["w - FW", FW]]}
+        clip: *frame
+        fill: {noise: {kind: value, period: [64, 48], scale: 2, octaves: 3, seed: 22, stops: frame_wood}}
+      - name: mitre joints
+        shape:
+          union:
+            - {polygon: [[0, -0.3], [FW, "FW - 0.3"], [FW, "FW + 0.3"], [0, 0.3]]}
+            - {polygon: [[w, -0.3], ["w - FW", "FW - 0.3"], ["w - FW", "FW + 0.3"], [w, 0.3]]}
+            - {polygon: [[0, "B - 0.3"], [FW, "B - FW - 0.3"], [FW, "B - FW + 0.3"], [0, "B + 0.3"]]}
+            - {polygon: [[w, "B - 0.3"], ["w - FW", "B - FW - 0.3"], ["w - FW", "B - FW + 0.3"], [w, "B + 0.3"]]}
+        clip: *frame
+        fill: groove
+        opacity: 0.8
+      - name: frame rounded edge
+        shape: {rect: [1, 1, "w - 1", "B - 1"], r: "R - 1"}
+        fill: {depth: [[0, "#00000000"], [0.6, "#FFD0A022"], [2.2, "#00000000"]]}
+      - name: frame light (top)
+        shape: {rect: [1, 1, "w - 1", "B - 1"], r: "R - 1"}
+        ring: 1
+        clip: {rect: [0, 0, w, FW]}
+        fill: frame_light
+        opacity: 0.55
+      - name: frame shade (bottom)
+        shape: {rect: [1, 1, "w - 1", "B - 1"], r: "R - 1"}
+        ring: 1.5
+        clip: {rect: [0, "B - FW", w, h]}
+        fill: "#000000"
+        opacity: 0.45
+      - name: carved groove
+        shape: {rect: [5, 5, "w - 5", "B - 5"], r: "R - 5"}
+        ring: 1.2
+        fill: groove
+        opacity: 0.85
+      - name: groove lit wall       # an engraved line: its far (lower/inner) wall catches the light
+        shape: {rect: [6.2, 6.2, "w - 6.2", "B - 6.2"], r: "R - 6.2"}
+        ring: 0.6
+        fill: frame_light
+        opacity: 0.25
+      - name: board (seams)
+        shape: {rect: [FW, FW, "w - FW", "B - FW"], r: 3}
+        fill: seam
+      - name: planks a
+        shape:
+          union: &planks_a
+            - {rect: [-41.6, 14.4, 21.6, 29.6]}
+            - {rect: [22.4, 14.4, 85.6, 29.6]}
+            - {rect: [86.4, 14.4, 149.6, 29.6]}
+            - {rect: [150.4, 14.4, 213.6, 29.6]}
+            - {rect: [-41.6, 62.4, 21.6, 77.6]}
+            - {rect: [22.4, 62.4, 85.6, 77.6]}
+            - {rect: [86.4, 62.4, 149.6, 77.6]}
+            - {rect: [150.4, 62.4, 213.6, 77.6]}
+            - {rect: [-41.6, 110.4, 21.6, 125.6]}
+            - {rect: [22.4, 110.4, 85.6, 125.6]}
+            - {rect: [86.4, 110.4, 149.6, 125.6]}
+            - {rect: [150.4, 110.4, 213.6, 125.6]}
+        clip: &board {rect: [FW, FW, "w - FW", "B - FW"], r: 3}
+        fill: {noise: {kind: wood, period: [64, 48], scale: 4, octaves: 3, seed: 11, warp: 0.5, stops: oak_a}}
+      - name: planks b
+        shape:
+          union: &planks_b
+            - {rect: [-9.6, 30.4, 53.6, 45.6]}
+            - {rect: [54.4, 30.4, 117.6, 45.6]}
+            - {rect: [118.4, 30.4, 181.6, 45.6]}
+            - {rect: [-9.6, 78.4, 53.6, 93.6]}
+            - {rect: [54.4, 78.4, 117.6, 93.6]}
+            - {rect: [118.4, 78.4, 181.6, 93.6]}
+            - {rect: [-9.6, 126.4, 53.6, 141.6]}
+            - {rect: [54.4, 126.4, 117.6, 141.6]}
+            - {rect: [118.4, 126.4, 181.6, 141.6]}
+        clip: *board
+        fill: {noise: {kind: wood, period: [64, 48], scale: 4, octaves: 3, seed: 12, warp: 0.5, stops: oak_b}}
+      - name: planks c
+        shape:
+          union: &planks_c
+            - {rect: [-25.6, -1.6, 37.6, 13.6]}
+            - {rect: [38.4, -1.6, 101.6, 13.6]}
+            - {rect: [102.4, -1.6, 165.6, 13.6]}
+            - {rect: [-25.6, 46.4, 37.6, 61.6]}
+            - {rect: [38.4, 46.4, 101.6, 61.6]}
+            - {rect: [102.4, 46.4, 165.6, 61.6]}
+            - {rect: [-25.6, 94.4, 37.6, 109.6]}
+            - {rect: [38.4, 94.4, 101.6, 109.6]}
+            - {rect: [102.4, 94.4, 165.6, 109.6]}
+        clip: *board
+        fill: {noise: {kind: wood, period: [64, 48], scale: 4, octaves: 3, seed: 13, warp: 0.5, stops: oak_c}}
+      - name: plank tint            # slow light/dark drift across the boards
+        shape: *board
+        fill: {noise: {kind: value, period: [64, 48], scale: 16, octaves: 2, seed: 4, stops: wood_tint}}
+      - name: plank edges           # every plank's edge darkens a little: rounded boards
+        shape: {union: [{union: *planks_a}, {union: *planks_b}, {union: *planks_c}]}
+        clip: *board
+        fill: {depth: [[0, "#1A0A0270"], [1.4, "#1A0A0200"]]}
+      - name: plank top light       # the top edge of each board catches the light
+        shape:
+          union:
+            - {rect: [13, 14.4, 163, 15.1]}
+            - {rect: [13, 30.4, 163, 31.1]}
+            - {rect: [13, 46.4, 163, 47.1]}
+            - {rect: [13, 62.4, 163, 63.1]}
+            - {rect: [13, 78.4, 163, 79.1]}
+            - {rect: [13, 94.4, 163, 95.1]}
+            - {rect: [13, 110.4, 163, 111.1]}
+        clip: {intersect: [*board, {union: [{union: *planks_a}, {union: *planks_b}, {union: *planks_c}]}]}
+        fill: "#FFD9A0"
+        opacity: 0.3
+      - name: board inner shadow    # the boards sit below the frame
+        shape: *board
+        fill: {depth: [[0, "#000000B0"], [4, "#00000000"]]}
+      # brass studs on the four frame corners
+      - name: stud shadows
+        shape:
+          union:
+            - {circle: [SC, SC, SR]}
+            - {circle: ["w - SC", SC, SR]}
+            - {circle: [SC, "B - SC", SR]}
+            - {circle: ["w - SC", "B - SC", SR]}
+        offset: [0.4, 1.1]
+        soft: 1.4
+        falloff: smooth
+        fill: "#000000"
+        opacity: 0.7
+      - name: stud rims
+        shape:
+          union:
+            - {circle: [SC, SC, SR]}
+            - {circle: ["w - SC", SC, SR]}
+            - {circle: [SC, "B - SC", SR]}
+            - {circle: ["w - SC", "B - SC", SR]}
+        fill: brass_dark
+      - name: studs top
+        shape: {union: [{circle: [SC, SC, "SR - 0.9"]}, {circle: ["w - SC", SC, "SR - 0.9"]}]}
+        fill: {vgrad: brass, from: "SC - SR", to: "SC + SR"}
+      - name: studs bottom
+        shape: {union: [{circle: [SC, "B - SC", "SR - 0.9"]}, {circle: ["w - SC", "B - SC", "SR - 0.9"]}]}
+        fill: {vgrad: brass, from: "B - SC - SR", to: "B - SC + SR"}
+      - name: stud rings            # a turned ring on the dome
+        shape:
+          union:
+            - {circle: [SC, SC, "SR - 2.2"]}
+            - {circle: ["w - SC", SC, "SR - 2.2"]}
+            - {circle: [SC, "B - SC", "SR - 2.2"]}
+            - {circle: ["w - SC", "B - SC", "SR - 2.2"]}
+        ring: 0.5
+        fill: "#7A4A12"
+        opacity: 0.5
+      - name: stud glints
+        shape:
+          union:
+            - {circle: ["SC - 1.3", "SC - 1.5", 1.1]}
+            - {circle: ["w - SC - 1.3", "SC - 1.5", 1.1]}
+            - {circle: ["SC - 1.3", "B - SC - 1.5", 1.1]}
+            - {circle: ["w - SC - 1.3", "B - SC - 1.5", 1.1]}
+        soft: 0.7
+        fill: "#FFFFFF"
+        opacity: 0.9
+
+  # ---------------------------------------------------------------- parchment card
+  card:
+    size: [120, 96]
+    stretch: [tile, tile]                 # paper texture repeats every 64 dp: fine-grained, so no blotch repeats
+    content: [12, 12, 12, 14]
+    overhang: [0, 0, 0, 2]
+    vars:
+      B: h - 2
+      R: 4
+    layers:
+      - {name: shadow, shape: {rect: [0.5, 1.5, "w - 0.5", "B + 2"], r: R}, fill: "#2A1606", soft: 2,
+         falloff: smooth, opacity: 0.4}
+      - name: parchment
+        shape: {rect: [0, 0, w, B], r: R}
+        fill: {noise: {kind: value, period: [64, 64], scale: 5, octaves: 4, seed: 5, stops: parchment}}
+      - name: stains
+        shape: {rect: [0, 0, w, B], r: R}
+        fill: {noise: {kind: value, period: [64, 64], scale: 8, octaves: 3, seed: 13,
+                       stops: [[0, "#8A5A2A00"], [0.7, "#8A5A2A00"], [1, "#8A5A2A20"]]}}
+      - name: fibres
+        shape: {rect: [0, 0, w, B], r: R}
+        fill: {noise: {kind: grain, period: [64, 64], seed: 9, stops: [[0, "#5A3A1A14"], [1, "#FFFFFF14"]]}}
+      - name: aged edge
+        shape: {rect: [0, 0, w, B], r: R}
+        fill: {depth: [[0, "#6E3E14C0"], [1.2, "#8A562460"], [6, "#8A562400"]]}
+      - name: ink border
+        shape: {rect: [5, 5, "w - 5", "B - 5"], r: 1.5}
+        ring: 0.8
+        fill: ink
+        opacity: 0.5
+      - name: outline
+        shape: {rect: [0, 0, w, B], r: R}
+        ring: 0.8
+        fill: ink
+        opacity: 0.8
+
+  # ---------------------------------------------------------------- buttons: frame + face
+  # Both share one frame (YAML anchors): drop shadow, dark outline, a metal bezel painted by distance from
+  # the edge (`depth`, so the frame is constant along both axes and the stone face can tile), the well.
+  btn_gem:
+    size: [132, 60]
+    outputs: [frame, face]
+    content: [20, 10, 20, 14]
+    overhang: [0, 0, 0, 2]
+    vars: &btn_vars
+      B: h - 2              # body bottom (the shadow hangs below)
+      CH: 10                # gem-cut chamfer
+      O: 1.2                # outline
+      BZ: 3.4               # bezel
+      IN: O + BZ            # the face's edge
+      FC: CH - 0.586 * IN   # the face's chamfer (an inset of a 45 degree cut shrinks it by 0.586 x the inset)
+      FT: 6.5               # top facet
+      FB: 7.5               # bottom facet
+      FS: 12                # side facets
+      PX0: IN + FS
+      PX1: w - IN - FS
+      PY0: IN + FT
+      PY1: B - IN - FB
+    colors:
+      metal_outline: "#2A1505"
+      bezel: [[0, "#FFF1C2"], [0.6, "#F2C462"], [1.8, "#C08A30"], [3.4, "#5E380C"]]
+      bezel_light: "#FFF6D8"
+      well: "#0A1A0A"
+    layers:
+      - &btn_shadow {name: shadow, output: frame, shape: {rect: [0.5, 1.5, "w - 0.5", "B + 2"], chamfer: CH},
+                     fill: "#1A0C02", soft: 1.5, falloff: smooth, opacity: 0.5}
+      - &btn_outline {name: outline, output: frame, shape: {rect: [0, 0, w, B], chamfer: CH}, fill: metal_outline}
+      - &btn_bezel {name: bezel, output: frame, shape: {rect: [O, O, "w - O", "B - O"], chamfer: "CH - 0.586 * O"},
+                    fill: {depth: bezel}}
+      - &btn_bezel_light {name: bezel light, output: frame,
+                          shape: {rect: [O, O, "w - O", "B - O"], chamfer: "CH - 0.586 * O"}, ring: 0.7,
+                          clip: {rect: [0, 0, w, "IN + 3"]}, fill: bezel_light, opacity: 0.8}
+      - &btn_bezel_shade {name: bezel shade, output: frame,
+                          shape: {rect: [O, O, "w - O", "B - O"], chamfer: "CH - 0.586 * O"}, ring: 1.6,
+                          clip: {rect: [0, "B - IN - 3", w, h]}, fill: "#000000", opacity: 0.35}
+      - &btn_well {name: well, output: frame, shape: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}, fill: well}
+      # face: a cut emerald: four mitred facets around a flat table, a glint on the top-left
+      - name: pavilion
+        output: face
+        shape: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: "#063A16"
+      - name: top facet
+        output: face
+        shape: {polygon: [[IN, IN], ["w - IN", IN], [PX1, PY0], [PX0, PY0]]}
+        clip: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: {vgrad: [[0, "#E4FFD6"], [1, "#8EE896"]], from: IN, to: PY0}
+      - name: left facet
+        output: face
+        shape: {polygon: [[IN, IN], [PX0, PY0], [PX0, PY1], [IN, "B - IN"]]}
+        clip: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: {vgrad: [[0, "#9CEFA0"], [1, "#2C9944"]], from: IN, to: "B - IN"}
+      - name: right facet
+        output: face
+        shape: {polygon: [["w - IN", IN], ["w - IN", "B - IN"], [PX1, PY1], [PX1, PY0]]}
+        clip: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: {vgrad: [[0, "#43B455"], [1, "#145E27"]], from: IN, to: "B - IN"}
+      - name: bottom facet
+        output: face
+        shape: {polygon: [[PX0, PY1], [PX1, PY1], ["w - IN", "B - IN"], [IN, "B - IN"]]}
+        clip: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: {vgrad: [[0, "#177A30"], [1, "#0A4A1C"]], from: PY1, to: "B - IN"}
+      - name: table
+        output: face
+        shape: {rect: [PX0, PY0, PX1, PY1], chamfer: 2}
+        fill: {vgrad: [[0, "#62D872"], [0.5, "#33B04E"], [1, "#1E8838"]], from: PY0, to: PY1}
+      - name: table edge light
+        output: face
+        shape: {rect: [PX0, PY0, PX1, PY1], chamfer: 2}
+        ring: 0.6
+        clip: {rect: [0, 0, w, "PY0 + 2"]}
+        fill: "#E8FFE0"
+        opacity: 0.75
+      - name: table reflection      # a slanted streak inside the left slice
+        output: face
+        shape: {polygon: [["PX0 + 5", "PY0 + 1"], ["PX0 + 10", "PY0 + 1"], ["PX0 + 6", "PY1 - 1"], ["PX0 + 2.5", "PY1 - 1"]]}
+        fill: "#FFFFFF"
+        opacity: 0.2
+      - name: glint                 # a four-point sparkle on the top-left facet
+        output: face
+        shape:
+          polygon: [["IN + 8", "IN - 0.4"], ["IN + 8.9", "IN + 2.2"], ["IN + 11.6", "IN + 3.1"], ["IN + 8.9", "IN + 4"],
+                    ["IN + 8", "IN + 6.6"], ["IN + 7.1", "IN + 4"], ["IN + 4.4", "IN + 3.1"], ["IN + 7.1", "IN + 2.2"]]
+        fill: "#FFFFFF"
+
+  btn_stone:
+    size: [132, 60]
+    stretch: [tile, fixed]               # the rock noise repeats along x; the button keeps its height
+    outputs: [frame, face]
+    content: [20, 10, 20, 14]
+    overhang: [0, 0, 0, 2]
+    vars: *btn_vars
+    colors:
+      metal_outline: "#121417"
+      bezel: [[0, "#EEF1F4"], [0.6, "#AEB4BB"], [1.8, "#6A7179"], [3.4, "#24282D"]]
+      bezel_light: "#FFFFFF"
+      well: "#0C0D0F"
+      rock: [[0, "#605B54"], [0.5, "#7E7970"], [1, "#9A9489"]]
+    layers:
+      - *btn_shadow
+      - *btn_outline
+      - *btn_bezel
+      - *btn_bezel_light
+      - *btn_bezel_shade
+      - *btn_well
+      - name: stone
+        output: face
+        shape: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: {noise: {kind: value, period: [32, 32], scale: 4, octaves: 5, seed: 7, stops: rock}}
+      - name: grit
+        output: face
+        shape: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: {noise: {kind: grain, period: [32, 32], scale: 0.67, seed: 2,
+                       stops: [[0, "#00000060"], [0.12, "#00000000"], [0.9, "#FFFFFF00"], [1, "#FFFFFF30"]]}}
+      - name: bevel light (top)
+        output: face
+        shape: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        ring: 1.8
+        clip: {rect: [0, 0, w, "IN + 5"]}
+        fill: "#FFFFFF"
+        opacity: 0.35
+      - name: lip (bottom)
+        output: face
+        shape: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        ring: 3.2
+        clip: {rect: [0, "B - IN - 6", w, h]}
+        fill: "#000000"
+        opacity: 0.4
+      - name: side shade
+        output: face
+        shape: {rect: [IN, IN, "w - IN", "B - IN"], chamfer: FC}
+        fill: {depth: [[0, "#00000050"], [2.2, "#00000000"]]}
+      - name: crack                  # a hairline crack inside the right slice
+        output: face
+        shape:
+          polygon: [["w - IN - 15", "IN + 1"], ["w - IN - 12", "IN + 7"], ["w - IN - 14", "IN + 11"], ["w - IN - 10", "IN + 17"],
+                    ["w - IN - 9.2", "IN + 17"], ["w - IN - 13.1", "IN + 11"], ["w - IN - 11.1", "IN + 7"], ["w - IN - 14.1", "IN + 1"]]
+        fill: "#1E1C1A"
+        opacity: 0.75
+
+  # ---------------------------------------------------------------- progress bar
+  bar_track:
+    size: [140, 22]
+    content: [9, 4, 9, 4]
+    vars:
+      R: 7
+      P: 4                  # pit inset (top/bottom)
+      PE: 9                 # pit inset (ends): room for the rivets
+    layers:
+      - {name: outline, shape: {rect: [0, 0, w, h], r: R}, fill: outline}
+      - name: iron band
+        shape: {rect: [1, 1, "w - 1", "h - 1"], r: "R - 1"}
+        fill: {depth: [[0, "#D4D8DC"], [0.6, "#8E949B"], [2.6, "#3A3F45"]]}
+      - name: band light
+        shape: {rect: [1, 1, "w - 1", "h - 1"], r: "R - 1"}
+        ring: 0.6
+        clip: {rect: [0, 0, w, 5]}
+        fill: "#FFFFFF"
+        opacity: 0.6
+      - name: pit
+        shape: {rect: [PE, P, "w - PE", "h - P"], r: 3}
+        fill: {vgrad: [[0, "#0D0703"], [1, "#2A1A0E"]], from: P, to: "h - P"}
+      - name: pit shadow
+        shape: {rect: [PE, P, "w - PE", "h - P"], r: 3}
+        fill: {depth: [[0, "#000000C0"], [2.5, "#00000000"]]}
+      - name: rivet rims
+        shape: {union: [{circle: [4.8, "h / 2", 2.4]}, {circle: ["w - 4.8", "h / 2", 2.4]}]}
+        fill: brass_dark
+      - name: rivets
+        shape: {union: [{circle: [4.8, "h / 2", 1.8]}, {circle: ["w - 4.8", "h / 2", 1.8]}]}
+        fill: {vgrad: brass, from: "h / 2 - 1.8", to: "h / 2 + 1.8"}
+
+  bar_fill:                 # sits in the track's pit (14 dp tall)
+    size: [64, 14]
+    layers:
+      - {name: edge, shape: {rect: [0, 0, w, h], r: 3}, fill: "#0B3A16"}
+      - name: liquid
+        shape: {rect: [0.8, 0.8, "w - 0.8", "h - 0.8"], r: 2.2}
+        fill: {vgrad: [[0, "#B4F7A4"], [0.3, "#5CD465"], [0.7, "#2E9E3E"], [1, "#1B6E2A"]], from: 0.8, to: "h - 0.8"}
+      - name: gloss
+        shape: {rect: [3, 1.8, "w - 3", 4.6], r: 1.4}
+        fill: "#FFFFFF"
+        opacity: 0.4
+
+  # ---------------------------------------------------------------- wax seal badge
+  seal:
+    size: [44, 46]
+    slice: none
+    content: [10, 10, 10, 12]
+    overhang: [0, 0, 0, 2]
+    layers:
+      - name: shadow
+        shape: &seal_blob
+          polygon: [[41.36, 22.00], [41.56, 25.10], [39.55, 27.70], [38.53, 30.42], [37.16, 33.01], [34.62, 34.62],
+                    [32.44, 36.37], [30.06, 37.82], [27.72, 39.59], [25.15, 41.87], [22.00, 41.42], [19.18, 39.79],
+                    [16.37, 39.33], [13.82, 38.06], [11.45, 36.52], [9.07, 34.93], [7.37, 32.63], [4.83, 30.75],
+                    [2.81, 28.23], [3.65, 24.91], [4.36, 22.00], [4.42, 19.22], [5.03, 16.49], [5.36, 13.52],
+                    [6.87, 11.01], [8.98, 8.98], [10.43, 6.08], [13.16, 4.65], [16.50, 5.07], [19.27, 4.74],
+                    [22.00, 4.42], [24.88, 3.83], [28.02, 3.47], [30.51, 5.30], [32.94, 6.94], [35.76, 8.24],
+                    [36.95, 11.14], [37.60, 14.05], [38.67, 16.58], [39.61, 19.21]]
+        offset: [0.6, 1.6]
+        soft: 1.6
+        falloff: smooth
+        fill: "#1A0405"
+        opacity: 0.5
+      - name: wax
+        shape: *seal_blob
+        fill: {vgrad: [[0, "#E2513F"], [0.45, "#B02222"], [1, "#6A0E12"]], from: 3.5, to: 42}
+      - name: rounded rim
+        shape: *seal_blob
+        fill: {depth: [[0, "#4A060980"], [0.8, "#FF907A30"], [2.6, "#FF907A00"]]}
+      - name: stamp floor
+        shape: {circle: [22, 22.4, 12.5]}
+        fill: "#8E1618"
+        opacity: 0.55
+      - name: stamp wall (top, shaded)
+        shape: {circle: [22, 22.4, 12.5]}
+        ring: 1.6
+        clip: {rect: [0, 0, 44, 20]}
+        fill: "#3A0406"
+        opacity: 0.55
+      - name: stamp wall (bottom, lit)
+        shape: {circle: [22, 22.4, 12.5]}
+        ring: 1.2
+        clip: {rect: [0, 25, 44, 46]}
+        fill: "#FF9A84"
+        opacity: 0.45
+      - name: emblem shadow
+        shape: &star {polygon: [[22.00, 14.80], [23.82, 19.89], [29.23, 20.05], [24.95, 23.36], [26.47, 28.55],
+                                [22.00, 25.50], [17.53, 28.55], [19.05, 23.36], [14.77, 20.05], [20.18, 19.89]]}
+        offset: [0, 0.7]
+        fill: "#3A0406"
+        opacity: 0.7
+      - name: emblem light
+        shape: *star
+        offset: [0, -0.5]
+        fill: "#FFB4A0"
+        opacity: 0.7
+      - name: emblem
+        shape: *star
+        fill: {vgrad: [[0, "#D23A30"], [1, "#9A1A1C"]], from: 14.8, to: 28.6}
+      - name: gloss
+        shape: {ellipse: [15, 11.5, 6, 2.6], angle: -35}
+        soft: 1.6
+        fill: "#FFFFFF"
+        opacity: 0.35

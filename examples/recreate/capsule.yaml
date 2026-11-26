@@ -1,0 +1,50 @@
+ninekit: 1
+name: recreate
+description: >
+  A HUD capsule recreated from reference.png (168 x 66 px, a 3x asset: 56 x 22 dp, W / D = 3) by measuring it with
+  `ninekit measure`. Centre column (px / dp): rim 0-3 / 1, face 3-50 / 15.67 (a highlight band over it at 7-24 /
+  2.33-8), lip 50-57 / 2.33, rim 57-60 / 1, a soft shadow below to 65. Row 15: the highlight starts 14 px (4.67 dp)
+  from the edge. Colours are the measured band colours; the highlight's alpha is solved from the face colour under it
+  (0.62 at its top, 0.09 at its bottom). See README.md for the commands and the compare metrics.
+scales: [1, 2, 3]
+out: out/
+
+vars:
+  B: 20                # the capsule's height (60 px); the shadow hangs below it
+  RIM: 1               # the dark rim (3 px)
+  FB: 16.63            # the face's bottom (49.9 px): the lip shows below it
+  HX: 4.67             # the highlight's inset from the ends (14 px)
+  HT: 2.33             # the highlight band, top and bottom (7 px, 24 px)
+  HB: 8
+
+colors:
+  rim: "#0E3B48"
+  face: [[0, "#68D7E3"], [1, "#2492AC"]]
+  lip: [[0, "#165F72"], [1, "#114E5F"]]
+  shade: "#0B1C24"
+  highlight: [[0, "#FFFFFF9E"], [1, "#FFFFFF18"]]
+
+pieces:
+  capsule:
+    size: [56, 22]
+    content: [10, 2, 10, 5]
+    overhang: [0, 0, 0, 2]
+    layers:
+      - name: shadow
+        shape: {rect: [0.67, 1, "w - 0.67", "B + 1"], r: "B / 2"}
+        fill: shade
+        soft: 1.4
+        falloff: smooth
+        opacity: 0.45
+      - name: rim
+        shape: {rect: [0, 0, w, B], r: "B / 2"}
+        fill: rim
+      - name: lip
+        shape: {rect: [RIM, RIM, "w - RIM", "B - RIM"], r: "B / 2 - RIM"}
+        fill: {vgrad: lip, from: FB, to: "B - RIM"}
+      - name: face
+        shape: {rect: [RIM, RIM, "w - RIM", FB], r: "(FB - RIM) / 2"}
+        fill: {vgrad: face, from: RIM, to: FB}
+      - name: highlight            # spans the width, its rounded ends inside the caps
+        shape: {rect: [HX, HT, "w - HX", HB], r: "(HB - HT) / 2"}
+        fill: {vgrad: highlight, from: HT, to: HB}

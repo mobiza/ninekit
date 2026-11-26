@@ -1,0 +1,31 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ninekit"
+version = "0.1.0"
+description = "Engine-agnostic 9-slice sprite generator for game and app UI"
+readme = { file = "docs/DESIGN.md", content-type = "text/markdown" }
+requires-python = ">=3.10"
+license = "MIT"
+license-files = ["LICENSE"]
+dependencies = ["numpy", "pillow>=10.1", "pyyaml"]
+
+[project.optional-dependencies]
+dev = ["pytest"]
+
+[project.scripts]
+ninekit = "ninekit.cli:main"
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.setuptools.package-data]
+ninekit = ["adapters/**/*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

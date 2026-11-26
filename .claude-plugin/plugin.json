@@ -1,0 +1,12 @@
+{
+  "name": "ninekit",
+  "version": "0.1.0",
+  "description": "Engine-agnostic UI sprite generator: measured, verified 9-slice panels, buttons, bars, badges and HUD pieces from a reference screenshot or a style description, exported for Godot, Unity, Flutter, CSS, Phaser or JSON.",
+  "author": {
+    "name": "Mobiza Games"
+  },
+  "homepage": "https://github.com/mobiza/ninekit",
+  "repository": "https://github.com/mobiza/ninekit",
+  "license": "MIT",
+  "keywords": ["ui", "sprites", "9-slice", "nine-patch", "game-ui", "godot", "unity", "flutter", "css", "phaser"]
+}

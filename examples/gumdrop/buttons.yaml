@@ -1,0 +1,33 @@
+# Gumdrop, ninekit's sample concept: glossy candy-casual buttons through the casual_button block, whose defaults
+# are this concept (a cool steel bezel, 20 dp corners, a thick candy lip, a large soft sheen).
+#   ninekit build examples/gumdrop/buttons.yaml     -> out/buttons/ (git-ignored)
+#   ninekit verify examples/gumdrop/buttons.yaml && ninekit preview examples/gumdrop/buttons.yaml
+# Every preset in both forms, as frame + face (the runtime stacks them and sinks the face when pressed):
+#   btn_<preset>_frame / _face     the 9-slice button, 128 x 62 dp (59 dp body + a 3 dp soft shadow below it)
+#   btnc_<preset>_frame / _face    the round button, 62 x 62 dp, drawn whole
+#   btnc_berry / btnc_sky          also a composite `main` (layers: [frame, face, full])
+# Presets: berry mint sky sun grape coal cloud, and gray for disabled. Override single colours under
+# params.colors, e.g. {style: mint, colors: {face_edge: "#7aeac0", bezel: {rim_light: "#ffffff"}}}.
+ninekit: 1
+name: gumdrop_buttons
+scales: [1, 2, 3]
+out: out/buttons/
+
+pieces:
+  btn_berry:  {block: casual_button, params: {style: berry}}
+  btn_mint:   {block: casual_button, params: {style: mint}}
+  btn_sky:    {block: casual_button, params: {style: sky}}
+  btn_sun:    {block: casual_button, params: {style: sun}}
+  btn_grape:  {block: casual_button, params: {style: grape}}
+  btn_coal:   {block: casual_button, params: {style: coal}}
+  btn_cloud:  {block: casual_button, params: {style: cloud}}
+  btn_gray:   {block: casual_button, params: {style: gray}}
+
+  btnc_berry: {block: casual_button, params: {style: berry, circle: true, layers: [frame, face, full]}}
+  btnc_mint:  {block: casual_button, params: {style: mint, circle: true}}
+  btnc_sky:   {block: casual_button, params: {style: sky, circle: true, layers: [frame, face, full]}}
+  btnc_sun:   {block: casual_button, params: {style: sun, circle: true}}
+  btnc_grape: {block: casual_button, params: {style: grape, circle: true}}
+  btnc_coal:  {block: casual_button, params: {style: coal, circle: true}}
+  btnc_cloud: {block: casual_button, params: {style: cloud, circle: true}}
+  btnc_gray:  {block: casual_button, params: {style: gray, circle: true}}

@@ -1,0 +1,202 @@
+# A tour of the layer language at three scales: `ninekit build examples/basics/basics.yaml` then
+# `ninekit verify examples/basics/basics.yaml` and `ninekit preview examples/basics/basics.yaml`.
+ninekit: 1
+name: basics
+scales: [1, 2, 3]
+out: out/
+
+vars:
+  R: 12            # panel corner radius
+  LIP: 4           # panel lip height
+
+colors:
+  ink: "#3A2E22"
+  panel_face: [[0, "#FFFBF0"], [0.06, "#FBF4E2"], [1, "#EADBBE"]]
+  panel_lip: [[0, "#C2AB86"], [1, "#9C8466"]]
+  blue_face: [[0, "#8ED2FF"], [0.12, "#5DB8F7"], [0.6, "#3A93E6"], [1, "#2468BC"]]
+  blue_lip: [[0, "#2A63AE"], [1, "#183F7C"]]
+  cyan: "#39E6FF"
+  tab_face: [[0, "#C7B0FF"], [0.15, "#AE8EFA"], [1, "#7652DC"]]
+  tab_lip: [[0, "#5A3DA0"], [1, "#3A2672"]]
+
+pieces:
+  # --- a cream panel: soft shadow, a darker lip under the face, a light top edge, a thin outline
+  panel:
+    size: [48, 44]
+    content: [10, 8, 10, 14]
+    overhang: [0, 0, 0, 3]
+    layers:
+      - name: shadow
+        shape: {rect: [3, 4, "w - 3", "h - 2"], r: R}
+        fill: "#000000"
+        soft: 2.5
+        falloff: smooth
+        opacity: 0.35
+      - name: lip
+        shape: {rect: [2, 0, "w - 2", "h - 3"], r: R}
+        fill: {vgrad: panel_lip, from: "h - 3 - LIP - 4", to: "h - 3"}
+      - name: face
+        shape: {rect: [2, 0, "w - 2", "h - 3 - LIP"], r: R}
+        fill: {vgrad: panel_face, to: "h - 3 - LIP"}
+      - name: top light
+        shape: {rect: [2, 0, "w - 2", "h - 3 - LIP"], r: R}
+        ring: 1.5
+        clip: {rect: [0, 0, w, 10]}
+        fill: "#FFFFFF"
+        opacity: 0.9
+      - name: outline
+        shape: {rect: [2, 0, "w - 2", "h - 3"], r: R}
+        ring: 1
+        fill: ink
+        opacity: 0.55
+
+  # --- a pill button: dark outline, a lip, a glossy face
+  pill:
+    size: [44, 30]
+    content: [12, 4, 12, 6]
+    layers:
+      - shape: {rect: [0, 0, w, h], r: "h / 2"}
+        fill: "#103565"
+      - name: lip
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 1.2"], r: "h / 2 - 1.2"}
+        fill: {vgrad: blue_lip, from: "h - 8", to: "h - 1.2"}
+      - name: face
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 4"], r: "(h - 5.2) / 2"}
+        fill: {vgrad: blue_face, from: 1.2, to: "h - 4"}
+      - name: gloss
+        shape: {rect: [7, 3, "w - 7", "h / 2 - 0.5"], r: 5}
+        fill: {vgrad: [[0, "#FFFFFFB0"], [1, "#FFFFFF18"]], from: 3, to: "h / 2 - 0.5"}
+
+  # --- a round badge drawn whole (no slices): shadow, rim, gradient disc, a depth-painted inner bevel, a highlight
+  badge:
+    size: [28, 30]
+    slice: none
+    layers:
+      - shape: {circle: [14, 16, 12.5]}
+        fill: "#000000"
+        soft: 2.5
+        falloff: smooth
+        opacity: 0.35
+      - shape: {circle: [14, 14, 13]}
+        fill: "#7E1A12"
+      - shape: {circle: [14, 14, 11.6]}
+        fill: {vgrad: [[0, "#F2675B"], [0.55, "#D93427"], [1, "#B0221A"]], from: 2.4, to: 25.6}
+      - name: bevel
+        shape: {circle: [14, 14, 11.6]}
+        fill: {depth: [[0, "#FFB2A8C0"], [1.6, "#FF8A7E00"]]}
+      - name: highlight
+        shape: {ellipse: [14, 8.6, 6.5, 3.2]}
+        fill: "#FFFFFF"
+        soft: 1.2
+        opacity: 0.4
+
+  # --- a chamfered sci-fi panel: dark body, a bright edge, an additive glow around the edge, corner marks
+  scifi:
+    size: [64, 48]
+    layers:
+      - name: body
+        shape: {inset: 6, chamfer: [9, 3, 9, 3]}
+        fill: {vgrad: [[0, "#14304A"], [1, "#081526"]]}
+      - name: edge
+        shape: {inset: 6, chamfer: [9, 3, 9, 3]}
+        ring: 1
+        fill: cyan
+      - name: glow
+        shape: {inset: 6, chamfer: [9, 3, 9, 3]}
+        ring: 1
+        soft: 3.5
+        falloff: exp
+        fill: cyan
+        opacity: 0.5
+        blend: add
+      - name: corner marks
+        shape:
+          union:
+            - {polygon: [[9, 15], [15, 9], [17, 9], [9, 17]]}
+            - {polygon: [["w - 9", "h - 15"], ["w - 15", "h - 9"], ["w - 17", "h - 9"], ["w - 9", "h - 17"]]}
+        fill: cyan
+        opacity: 0.85
+
+  # --- a progress bar: a recessed track (depth-painted inner shadow) and a glossy fill drawn over it
+  bar_track:
+    size: [40, 16]
+    layers:
+      - shape: {rect: [0, 0, w, h], r: "h / 2"}
+        fill: "#0B1B33"
+      - name: inner shadow
+        shape: {rect: [1, 1, "w - 1", "h - 1"], r: "h / 2 - 1"}
+        fill: {depth: [[0, "#040B16"], [3.5, "#1E3358"]]}
+      - name: bottom light
+        shape: {rect: [0, 0, w, h], r: "h / 2"}
+        ring: 1
+        clip: {rect: [0, "h / 2 + 2", w, h]}
+        fill: "#8FB2E8"
+        opacity: 0.5
+  bar_fill:
+    size: [32, 12]
+    layers:
+      - shape: {rect: [0, 0, w, h], r: "h / 2"}
+        fill: "#1D6B12"
+      - shape: {rect: [1, 1, "w - 1", "h - 1"], r: "h / 2 - 1"}
+        fill: {vgrad: [[0, "#C3F57A"], [0.45, "#76CF35"], [1, "#3F9A1B"]], from: 1, to: "h - 1"}
+      - name: gloss
+        shape: {rect: [3.5, 2, "w - 3.5", "h / 2"], r: 2}
+        fill: "#FFFFFF"
+        opacity: 0.4
+
+  # --- a tab in two images on one canvas: the frame (outline + lip) and the face (the runtime can offset it)
+  tab:
+    size: [52, 34]
+    outputs: [frame, face]
+    content: [8, 4, 8, 7]
+    layers:
+      - output: frame
+        shape: {rect: [0, 0, w, h], r: [11, 11, 3, 3]}
+        fill: "#2C1F52"
+      - output: frame
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 1.2"], r: [9.8, 9.8, 2, 2]}
+        fill: {vgrad: tab_lip, from: "h - 8", to: "h - 1.2"}
+      - output: face
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 5"], r: [9.8, 9.8, 2, 2]}
+        fill: {vgrad: tab_face, from: 1.2, to: "h - 5"}
+      - output: face
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 5"], r: [9.8, 9.8, 2, 2]}
+        ring: 1.2
+        clip: {rect: [0, 0, w, 8]}
+        fill: "#FFFFFF"
+        opacity: 0.6
+
+  # --- shade mode: one art in greys (0 = outline .. 1 = highlight), the runtime maps it through a colour ramp
+  shade_button:
+    mode: shade
+    size: [44, 32]
+    layers:
+      - shape: {rect: [0, 0, w, h], r: 10}
+        fill: 0
+      - name: lip
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 1.2"], r: 8.8}
+        fill: {vgrad: [[0, 0.32], [1, 0.18]], from: "h - 8", to: "h - 1.2"}
+      - name: face
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 5"], r: 8.8}
+        fill: {vgrad: [[0, 0.96], [0.35, 0.78], [1, 0.62]], from: 1.2, to: "h - 5"}
+      - name: top light
+        shape: {rect: [1.2, 1.2, "w - 1.2", "h - 5"], r: 8.8}
+        ring: 1.2
+        clip: {rect: [0, 0, w, 8]}
+        fill: 1
+        opacity: 0.8
+
+  # --- a stone plate: value noise with a 24 dp period, tiled both ways inside a rounded border
+  stone:
+    size: [72, 64]
+    stretch: [tile, tile]
+    layers:
+      - shape: {rect: [0, 0, w, h], r: 9}
+        fill: "#2E2925"
+      - name: stone
+        shape: {inset: 2, r: 7}
+        fill: {noise: {kind: value, period: [24, 24], scale: 6, octaves: 4, seed: 7,
+                       stops: [[0, "#5F5A52"], [0.5, "#878075"], [1, "#B3AB9C"]]}}
+      - name: inner shade
+        shape: {inset: 2, r: 7}
+        fill: {depth: [[0, "#000000A0"], [2.5, "#00000000"]]}
